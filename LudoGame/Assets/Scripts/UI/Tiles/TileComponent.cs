@@ -7,10 +7,17 @@ namespace Assets.Scripts.UI.Tiles
     {
         [SerializeField] private Image _bgImage;
 
+        [SerializeField] private Image _arrowImage;
 
-        public void SetBgColor(Color color)
+        public void InitializeTile(Color bgColor, Color tileThemeColor, bool arrowVisible)
         {
-            _bgImage.color = color;
+            _arrowImage.enabled = arrowVisible;
+            _bgImage.color = bgColor;
+
+            if (arrowVisible)
+            {
+                _arrowImage.color = tileThemeColor;
+            }
         }
     }
 }

@@ -1,20 +1,12 @@
 using System.Collections.Generic;
+using Assets.Scripts.DataTypes;
 using UnityEngine;
 
 namespace Assets.Scripts.UI.Tiles
 {
-    public enum PlayerColorOption
-    {
-        Yellow,
-        Green,
-        Blue,
-        Red
-    }
-
     public class TilesGrid : MonoBehaviour
     {
         [SerializeField] private PlayerColorOption _playerColorOption;
-
 
         [SerializeField] private GameObject _tilePrefab;
 
@@ -35,13 +27,16 @@ namespace Assets.Scripts.UI.Tiles
 
         private void Start()
         {
+            var tileThemeColor = _gridColorMap[_playerColorOption];
+
             for (var row = 0; row < GridRows; row++)
             {
                 for (var col = 0; col < GridColumns; col++)
                 {
-                    var usedColor = (row > 0 && col == 1) || (row == 1 && col == 2) ? _gridColorMap[_playerColorOption] : _defaultColor;
+                    var usedBgColor = (row > 0 && col == 1) || (row == 1 && col == 2) ? tileThemeColor : _defaultColor;
+                    var arrowVisible = row == 0 && col == 1;
 
-                    _gridTiles[row, col] = TileFactory.CreateTile(_tilePrefab, usedColor, transform);
+                    _gridTiles[row, col] = TileFactory.CreateTile(_tilePrefab, usedBgColor, tileThemeColor,  arrowVisible, transform);
                 }
             }
         }
