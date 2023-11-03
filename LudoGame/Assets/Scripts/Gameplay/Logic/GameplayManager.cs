@@ -1,3 +1,4 @@
+using System;
 using Assets.Scripts.UI.Dice;
 using UnityEngine;
 
@@ -20,7 +21,21 @@ namespace Assets.Scripts.Gameplay.Logic
         }
         public void RollDice(DiceAnimate diceAnimate)
         {
-            DiceRoller.Roll(diceAnimate);
+            diceAnimate.Animate();
+
+            Action<int> success = (result) =>
+            {
+                diceAnimate.Stop();
+                diceAnimate.SetDiceResult(result);
+            };
+
+            Action<string> error = (message) =>
+            {
+                diceAnimate.Stop();
+                Debug.LogError(message);
+            };
+
+            StartCoroutine(RandomUtility.FetchDiceRandomNumber(success, error));
         }
 
         public void ResetPosition()

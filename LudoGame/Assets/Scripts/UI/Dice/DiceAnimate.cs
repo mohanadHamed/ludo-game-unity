@@ -16,6 +16,8 @@ namespace Assets.Scripts.UI.Dice
 
         public void Animate()
         {
+            GetComponent<Image>().enabled = true;
+
             if (IsAnimating)
             {
                 Stop();
