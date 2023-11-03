@@ -66,6 +66,7 @@
     <Compile Include="Assets\Scripts\UI\StartPositions\StartPositionsComponent.cs" />
     <Compile Include="Assets\Scripts\UI\Tiles\TilesGrid.cs" />
     <Compile Include="Assets\Scripts\Networking\RandomUtility.cs" />
+    <Compile Include="Assets\Scripts\Gameplay\Logic\PlayerChip.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

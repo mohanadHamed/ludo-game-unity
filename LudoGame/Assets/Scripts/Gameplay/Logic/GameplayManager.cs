@@ -1,5 +1,7 @@
 using System;
+using Assets.Scripts.DataTypes;
 using Assets.Scripts.UI.Dice;
+using Assets.Scripts.UI.Game;
 using UnityEngine;
 
 namespace Assets.Scripts.Gameplay.Logic
@@ -7,6 +9,9 @@ namespace Assets.Scripts.Gameplay.Logic
     public class GameplayManager : MonoBehaviour
     {
         public static GameplayManager Instance;
+
+        [SerializeField] private LudoBoardUiComponent _ludoBoardUiComponent;
+        [SerializeField] private GamePanelUiComponent _gamePanelUiComponent;
 
         private void Awake()
         {
@@ -18,6 +23,11 @@ namespace Assets.Scripts.Gameplay.Logic
             {
                 Destroy(gameObject);
             }
+        }
+
+        private void Start()
+        {
+            ResetPositions(_gamePanelUiComponent.PlayerChips);
         }
         public void RollDice(DiceAnimate diceAnimate)
         {
@@ -38,9 +48,14 @@ namespace Assets.Scripts.Gameplay.Logic
             StartCoroutine(RandomUtility.FetchDiceRandomNumber(success, error));
         }
 
-        public void ResetPosition()
+        public void ResetPositions(PlayerChip[] playerChips)
         {
-
+           // playerChip.SetPosition(13, 6, _ludoBoardUiComponent);
+           
+           foreach (var chip in playerChips)
+           {
+               chip.ResetPosition(_ludoBoardUiComponent);
+           }
         }
     }
 }
