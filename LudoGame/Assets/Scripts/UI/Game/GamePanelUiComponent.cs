@@ -1,3 +1,5 @@
+using Assets.Scripts.Gameplay.Logic;
+using Assets.Scripts.UI.Dice;
 using UnityEngine;
 
 namespace Assets.Scripts.UI.Game
@@ -18,6 +20,12 @@ namespace Assets.Scripts.UI.Game
 
             _ludoBoardUiComponent.FixSize(boardPixelSize);
             _rtButtonsPanel.sizeDelta = new Vector2(Screen.width, buttonsPanelHeight);
+        }
+
+
+        public void RollButtonClick(DiceAnimate diceAnimate)
+        {
+            GameplayManager.Instance.RollDice(diceAnimate);
         }
     }
 }

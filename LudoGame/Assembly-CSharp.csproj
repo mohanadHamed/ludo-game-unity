@@ -63,6 +63,9 @@
     <Compile Include="Assets\Scripts\UI\Tiles\TileComponent.cs" />
     <Compile Include="Assets\Scripts\UI\StartPositions\StartPositionsComponent.cs" />
     <Compile Include="Assets\Scripts\UI\Tiles\TilesGrid.cs" />
+    <Compile Include="Assets\Scripts\Gameplay\Logic\DiceRoller.cs" />
+    <Compile Include="Assets\Scripts\UI\Dice\DiceAnimate.cs" />
+    <Compile Include="Assets\Scripts\Gameplay\Logic\GameplayManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
