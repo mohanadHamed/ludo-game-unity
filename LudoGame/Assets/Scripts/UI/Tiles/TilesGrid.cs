@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Assets.Scripts.DataTypes;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Assets.Scripts.UI.Tiles
 {
@@ -10,13 +11,9 @@ namespace Assets.Scripts.UI.Tiles
 
         [SerializeField] private GameObject _tilePrefab;
 
-        private const int GridColumns = 3;
-
-        private const int GridRows = 6;
-
         private readonly Color _defaultColor = Color.white;
 
-        private readonly TileComponent[,] _gridTiles = new TileComponent[GridRows, GridColumns];
+        private readonly TileComponent[,] _gridTiles = new TileComponent[LudoBoardUiComponent.TileGridNumRows, LudoBoardUiComponent.TileGridNumColumns];
 
         private readonly Dictionary<PlayerColorOption, Color> _gridColorMap = new() {
             { PlayerColorOption.Yellow, new Color(1f, 0.949f, 0f)},
@@ -29,9 +26,9 @@ namespace Assets.Scripts.UI.Tiles
         {
             var tileThemeColor = _gridColorMap[_playerColorOption];
 
-            for (var row = 0; row < GridRows; row++)
+            for (var row = 0; row < LudoBoardUiComponent.TileGridNumRows; row++)
             {
-                for (var col = 0; col < GridColumns; col++)
+                for (var col = 0; col < LudoBoardUiComponent.TileGridNumColumns; col++)
                 {
                     var usedBgColor = (row > 0 && col == 1) || (row == 1 && col == 2) ? tileThemeColor : _defaultColor;
                     var arrowVisible = row == 0 && col == 1;
@@ -39,6 +36,14 @@ namespace Assets.Scripts.UI.Tiles
                     _gridTiles[row, col] = TileFactory.CreateTile(_tilePrefab, usedBgColor, tileThemeColor,  arrowVisible, transform);
                 }
             }
+        }
+
+        public void FixSize(float cellPixelSize)
+        { 
+            var tilesGridPixelSize = new Vector2(LudoBoardUiComponent.TileGridNumColumns * cellPixelSize, LudoBoardUiComponent.TileGridNumRows * cellPixelSize);
+
+            GetComponent<RectTransform>().sizeDelta = tilesGridPixelSize;
+            GetComponent<GridLayoutGroup>().cellSize = new Vector2(cellPixelSize, cellPixelSize);
         }
     }
 }
