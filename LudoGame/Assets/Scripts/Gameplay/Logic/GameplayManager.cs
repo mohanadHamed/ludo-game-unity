@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using Assets.Scripts.DataTypes;
 using Assets.Scripts.UI.Dice;
 using Assets.Scripts.UI.Game;
@@ -19,6 +20,8 @@ namespace Assets.Scripts.Gameplay.Logic
         [SerializeField] private LudoBoardUiComponent _ludoBoardUiComponent;
 
         [SerializeField] private GamePanelUiComponent _gamePanelUiComponent;
+
+        [SerializeField] private DiceAnimate _diceAnimate;
 
         private bool _isFetchingRandomNumber;
 
@@ -77,11 +80,20 @@ namespace Assets.Scripts.Gameplay.Logic
            }
 
            NewDiceRollAvailable = false;
+           _diceAnimate.HideDiceImage();
         }
 
-        public void MoveChip(PlayerChip playerChip)
+        public IEnumerator MoveChip(PlayerChip playerChip)
         {
-            StartCoroutine(ChipMover.Move(playerChip, _ludoBoardUiComponent));
+            if (IsChipMoving || NewDiceRollAvailable == false) yield break;
+
+            IsChipMoving = true;
+            
+            yield return ChipMover.Move(playerChip, _ludoBoardUiComponent);
+
+            NewDiceRollAvailable = false;
+            IsChipMoving = false;
+            _diceAnimate.HideDiceImage();
         }
     }
 }

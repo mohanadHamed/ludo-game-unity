@@ -43,8 +43,13 @@ namespace Assets.Scripts.UI.Dice
             }
             else
             {
-                GetComponent<Image>().sprite = null;
+                HideDiceImage();
             }
+        }
+
+        public void HideDiceImage()
+        {
+            GetComponent<Image>().enabled = false;
         }
 
         private IEnumerator AnimateInternal()

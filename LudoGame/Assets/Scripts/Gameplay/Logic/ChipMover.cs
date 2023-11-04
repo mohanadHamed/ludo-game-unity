@@ -24,13 +24,9 @@ namespace Assets.Scripts.Gameplay.Logic
 
         public static IEnumerator Move(PlayerChip playerChip, LudoBoardUiComponent ludoBoardUiComponent)
         {
-            if(GameplayManager.Instance.IsChipMoving) yield break;
-
-            if (playerChip.IsHomeReached || GameplayManager.Instance.NewDiceRollAvailable == false) yield break;
+            if (playerChip.IsHomeReached) yield break;
 
             if (DistanceToHome(playerChip, ludoBoardUiComponent) < GameplayManager.Instance.LastDiceRoll) yield break;
-
-            GameplayManager.Instance.IsChipMoving = true;
 
             for (var i = 1; i <= GameplayManager.Instance.LastDiceRoll; i++)
             {
@@ -38,9 +34,6 @@ namespace Assets.Scripts.Gameplay.Logic
 
                 yield return new WaitForSeconds(MoveStepDelaySeconds);
             }
-
-            GameplayManager.Instance.NewDiceRollAvailable = false;
-            GameplayManager.Instance.IsChipMoving = false;
         }
 
         private static void MoveOneStep(PlayerChip playerChip, LudoBoardUiComponent ludoBoardUiComponent)

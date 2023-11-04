@@ -418,6 +418,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _ludoBoardUiComponent: {fileID: 794249867}
   _gamePanelUiComponent: {fileID: 2002428436}
+  _diceAnimate: {fileID: 2014392241}
 --- !u!4 &1932912634
 Transform:
   m_ObjectHideFlags: 0
@@ -447,6 +448,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0a8d67e7fa8c65343889dd7e865e35df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2014392241 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1004393028, guid: f2ab88a2fec2edc48a48c883c17feee7, type: 3}
+  m_PrefabInstance: {fileID: 2923383859585601685}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f924d647863ec74192725bbc8417252, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &2923383859585601685
@@ -591,6 +603,18 @@ PrefabInstance:
     - target: {fileID: 3317420659738196300, guid: f2ab88a2fec2edc48a48c883c17feee7, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6105774666152799655, guid: f2ab88a2fec2edc48a48c883c17feee7, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6105774666152799655, guid: f2ab88a2fec2edc48a48c883c17feee7, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6105774666152799655, guid: f2ab88a2fec2edc48a48c883c17feee7, type: 3}
+      propertyPath: m_Color.r
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f2ab88a2fec2edc48a48c883c17feee7, type: 3}

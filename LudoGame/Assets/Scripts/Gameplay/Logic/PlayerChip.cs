@@ -51,7 +51,7 @@ namespace Assets.Scripts.Gameplay.Logic
 
         public void ChipClick()
         {
-            GameplayManager.Instance.MoveChip(this);
+            StartCoroutine(GameplayManager.Instance.MoveChip(this));
         }
     }
 }
