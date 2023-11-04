@@ -81,6 +81,11 @@ public class LudoBoardUiComponent : MonoBehaviour
         foreach (var startPos in _startPositionsArray)
         {
             startPos.GetComponent<RectTransform>().sizeDelta = new Vector2(startPositionsPixelSize, startPositionsPixelSize);
+
+            startPos.Positions[0].anchoredPosition = new Vector2(-CellPixelSize, CellPixelSize);
+            startPos.Positions[1].anchoredPosition = new Vector2(CellPixelSize, CellPixelSize);
+            startPos.Positions[2].anchoredPosition = new Vector2(-CellPixelSize, -CellPixelSize);
+            startPos.Positions[3].anchoredPosition = new Vector2(CellPixelSize, -CellPixelSize);
         }
 
         foreach (var tg in _tilesGridArray)

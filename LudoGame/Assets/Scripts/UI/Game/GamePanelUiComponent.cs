@@ -8,7 +8,7 @@ namespace Assets.Scripts.UI.Game
     {
         public PlayerChip[] PlayerChips => _playerChips;
 
-        private const float MinButtonsPanelHeight = 100f;
+        private const float MinButtonsPanelHeight = 300f;
 
         [SerializeField] private LudoBoardUiComponent _ludoBoardUiComponent;
 
