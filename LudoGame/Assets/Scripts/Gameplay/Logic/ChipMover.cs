@@ -32,6 +32,8 @@ namespace Assets.Scripts.Gameplay.Logic
             {
                 MoveOneStep(playerChip, ludoBoardUiComponent);
 
+                GameplayManager.Instance.PlayChipMoveAudio();
+
                 yield return new WaitForSeconds(MoveStepDelaySeconds);
             }
         }

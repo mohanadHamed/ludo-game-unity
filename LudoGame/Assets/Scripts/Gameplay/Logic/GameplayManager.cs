@@ -1,6 +1,6 @@
 using System;
 using System.Collections;
-using Assets.Scripts.DataTypes;
+using Assets.Scripts.Networking;
 using Assets.Scripts.UI.Dice;
 using Assets.Scripts.UI.Game;
 using UnityEngine;
@@ -22,6 +22,12 @@ namespace Assets.Scripts.Gameplay.Logic
         [SerializeField] private GamePanelUiComponent _gamePanelUiComponent;
 
         [SerializeField] private DiceAnimate _diceAnimate;
+
+        [SerializeField] private AudioSource _audioSource;
+
+        [SerializeField] private AudioClip _diceRollAudio;
+
+        [SerializeField] private AudioClip _chipMoveAudio;
 
         private bool _isFetchingRandomNumber;
 
@@ -49,9 +55,13 @@ namespace Assets.Scripts.Gameplay.Logic
 
             diceAnimate.Animate();
 
+            PlayRollAudio();
+
             _isFetchingRandomNumber = true;
             Action<int> fetchRandomSuccess = (result) =>
             {
+                _audioSource.Stop();
+
                 diceAnimate.Stop();
                 diceAnimate.SetDiceResult(result);
                 _isFetchingRandomNumber = false;
@@ -61,6 +71,8 @@ namespace Assets.Scripts.Gameplay.Logic
 
             Action<string> fetchRandomError = (message) =>
             {
+                _audioSource.Stop();
+
                 diceAnimate.Stop();
                 Debug.LogError(message);
                 _isFetchingRandomNumber = false;
@@ -94,6 +106,30 @@ namespace Assets.Scripts.Gameplay.Logic
             NewDiceRollAvailable = false;
             IsChipMoving = false;
             _diceAnimate.HideDiceImage();
+        }
+
+        public void PlayRollAudio()
+        {
+            if (_audioSource.isPlaying)
+            {
+                _audioSource.Stop();
+            }
+
+            _audioSource.loop = true;
+            _audioSource.clip = _diceRollAudio;
+            _audioSource.Play();
+        }
+
+        public void PlayChipMoveAudio()
+        {
+            if (_audioSource.isPlaying)
+            {
+                _audioSource.Stop();
+            }
+
+            _audioSource.loop = false;
+            _audioSource.clip = _chipMoveAudio;
+            _audioSource.Play();
         }
     }
 }

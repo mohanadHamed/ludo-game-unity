@@ -2,37 +2,40 @@ using System;
 using System.Collections;
 using UnityEngine.Networking;
 
-public static class RandomUtility
+namespace Assets.Scripts.Networking
 {
-    private const string Url = "https://www.random.org/integers/?num=1&min=1&max=6&col=1&base=10&format=plain&rnd=new";
-
-    public static IEnumerator FetchDiceRandomNumber(Action<int> success, Action<string> fail)
+    public static class RandomUtility
     {
-        // Create a UnityWebRequest object.
-        var request = UnityWebRequest.Get(Url);
+        private const string Url = "https://www.random.org/integers/?num=1&min=1&max=6&col=1&base=10&format=plain&rnd=new";
 
-        // Start the request.
-        request.SendWebRequest();
-
-        // Check if the request is complete.
-        while (!request.isDone)
+        public static IEnumerator FetchDiceRandomNumber(Action<int> success, Action<string> fail)
         {
-            // Yield control to the next frame.
-            yield return null;
-        }
+            // Create a UnityWebRequest object.
+            var request = UnityWebRequest.Get(Url);
 
-        try
-        {
-            var result = Convert.ToInt32(request.downloadHandler.text);
+            // Start the request.
+            request.SendWebRequest();
 
-            success(result);
-        }
-        catch (Exception ex)
-        {
-            fail("Error: " + request.error + " " + ex.Message);
-        }
+            // Check if the request is complete.
+            while (!request.isDone)
+            {
+                // Yield control to the next frame.
+                yield return null;
+            }
 
-        // Close the request.
-        request.Dispose();
+            try
+            {
+                var result = Convert.ToInt32(request.downloadHandler.text);
+
+                success(result);
+            }
+            catch (Exception ex)
+            {
+                fail("Error: " + request.error + " " + ex.Message);
+            }
+
+            // Close the request.
+            request.Dispose();
+        }
     }
 }
