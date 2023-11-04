@@ -7,13 +7,13 @@ namespace Assets.Scripts.UI.Tiles
 {
     public class TilesGrid : MonoBehaviour
     {
+        public TileComponent[,] GridTiles { get; } = new TileComponent[LudoBoardUiComponent.TileGridNumRows, LudoBoardUiComponent.TileGridNumColumns];
+
         [SerializeField] private PlayerColorOption _playerColorOption;
 
         [SerializeField] private GameObject _tilePrefab;
 
         private readonly Color _defaultColor = Color.white;
-
-        private readonly TileComponent[,] _gridTiles = new TileComponent[LudoBoardUiComponent.TileGridNumRows, LudoBoardUiComponent.TileGridNumColumns];
 
         private readonly Dictionary<PlayerColorOption, Color> _gridColorMap = new() {
             { PlayerColorOption.Yellow, new Color(1f, 0.949f, 0f)},
@@ -33,7 +33,7 @@ namespace Assets.Scripts.UI.Tiles
                     var usedBgColor = (row > 0 && col == 1) || (row == 1 && col == 2) ? tileThemeColor : _defaultColor;
                     var arrowVisible = row == 0 && col == 1;
 
-                    _gridTiles[row, col] = TileFactory.CreateTile(_tilePrefab, usedBgColor, tileThemeColor,  arrowVisible, transform);
+                    GridTiles[row, col] = TileFactory.CreateTile(_tilePrefab, usedBgColor, tileThemeColor,  arrowVisible, transform);
                 }
             }
         }

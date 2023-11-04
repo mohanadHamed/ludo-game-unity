@@ -1,4 +1,6 @@
+using System;
 using Assets.Scripts.DataTypes;
+using Assets.Scripts.UI.Tiles;
 using UnityEngine;
 
 namespace Assets.Scripts.Gameplay.Logic
@@ -6,6 +8,14 @@ namespace Assets.Scripts.Gameplay.Logic
     public class PlayerChip : MonoBehaviour
     {
         public PlayerColorOption PlayerColorOption => _playerColorOption;
+
+        public bool IsPositionReset { get; set; }
+
+        public bool IsHomeReached { get; set; }
+
+        public TilesGrid CurrentTilesGrid { get; set; }
+
+        public Tuple<int,int> CurrentGridPosition { get; set; }
 
         public int ChipNumber => _chipNumber;
 
@@ -30,7 +40,18 @@ namespace Assets.Scripts.Gameplay.Logic
 
             var pos = startPositionComponent.Positions[_chipNumber - 1];
 
-            GetComponent<RectTransform>().anchoredPosition = pos;
+            transform.SetParent(pos.transform);
+            GetComponent<RectTransform>().anchoredPosition = Vector2.zero;
+
+            IsPositionReset = true;
+            IsHomeReached = false;
+            CurrentGridPosition = new Tuple<int, int>(-1, -1);
+            CurrentTilesGrid = ludoBoard.GetStartingTilesGridForColorOption(PlayerColorOption);
+        }
+
+        public void ChipClick()
+        {
+            GameplayManager.Instance.MoveChip(this);
         }
     }
 }

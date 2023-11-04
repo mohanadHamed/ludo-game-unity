@@ -37,7 +37,14 @@ namespace Assets.Scripts.UI.Dice
 
         public void SetDiceResult(int result)
         {
-            GetComponent<Image>().sprite = _frames[Math.Clamp(result - 1, 0, _frames.Length)];
+            if (result != -1)
+            {
+                GetComponent<Image>().sprite = _frames[Math.Clamp(result - 1, 0, _frames.Length)];
+            }
+            else
+            {
+                GetComponent<Image>().sprite = null;
+            }
         }
 
         private IEnumerator AnimateInternal()

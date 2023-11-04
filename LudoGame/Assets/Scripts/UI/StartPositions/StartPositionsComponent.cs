@@ -7,7 +7,7 @@ namespace Assets.Scripts.UI.StartPositions
 {
     public class StartPositionsComponent : MonoBehaviour
     {
-        public Vector2[] Positions => _positions;
+        public RectTransform[] Positions => _positions;
 
         [SerializeField] private PlayerColorOption _playerColorOption;
 
@@ -19,9 +19,7 @@ namespace Assets.Scripts.UI.StartPositions
 
         [SerializeField] private Sprite _redSprite;
 
-        private Vector2[] _positions;
-
-        
+        [SerializeField] RectTransform[] _positions;
 
         private void Start()
         {
@@ -34,23 +32,6 @@ namespace Assets.Scripts.UI.StartPositions
             };
 
             GetComponent<Image>().sprite = colorSpriteMap[_playerColorOption];
-        }
-
-        public void InitializePositions(int minRow, int minCol, int maxRow, int maxCol, float cellPixelSize)
-        {
-        var topLeftPosition = new Vector2(minCol * cellPixelSize, -minRow * cellPixelSize);
-        var bottomRightPosition = new Vector2(maxCol * cellPixelSize, -maxRow * cellPixelSize);
-
-        var xDiff = bottomRightPosition.x - topLeftPosition.x;
-        var yDiff = bottomRightPosition.y - topLeftPosition.y;
-
-            _positions = new Vector2[4];
-
-            _positions[0] = new Vector2(topLeftPosition.x + xDiff * 0.4f, topLeftPosition.y + yDiff * 0.4f);
-            _positions[1] = new Vector2(topLeftPosition.x + xDiff * 0.8f, topLeftPosition.y + yDiff * 0.4f);
-            _positions[2] = new Vector2(topLeftPosition.x + xDiff * 0.4f, topLeftPosition.y + yDiff * 0.8f);
-            _positions[3] = new Vector2(topLeftPosition.x + xDiff * 0.8f, topLeftPosition.y + yDiff * 0.8f);
-
         }
     }
 }
