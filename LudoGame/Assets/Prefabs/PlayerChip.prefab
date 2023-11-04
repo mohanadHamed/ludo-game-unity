@@ -136,3 +136,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _playerColorOption: 2
   _chipNumber: 1
+  _chipSpriteAddress: Board/blue-chip

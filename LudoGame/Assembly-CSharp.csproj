@@ -60,14 +60,15 @@
     <Compile Include="Assets\Scripts\UI\Game\GamePanelUiComponent.cs" />
     <Compile Include="Assets\Scripts\UI\Tiles\TileFactory.cs" />
     <Compile Include="Assets\Scripts\DataTypes\PlayerColorOption.cs" />
+    <Compile Include="Assets\Scripts\Gameplay\Logic\PlayerChip.cs" />
     <Compile Include="Assets\Scripts\UI\Board\LudoBoardUiComponent.cs" />
     <Compile Include="Assets\Scripts\UI\Dice\DiceAnimate.cs" />
     <Compile Include="Assets\Scripts\UI\Tiles\TileComponent.cs" />
+    <Compile Include="Assets\Scripts\Gameplay\Logic\ChipMover.cs" />
     <Compile Include="Assets\Scripts\UI\StartPositions\StartPositionsComponent.cs" />
     <Compile Include="Assets\Scripts\UI\Tiles\TilesGrid.cs" />
     <Compile Include="Assets\Scripts\Networking\RandomUtility.cs" />
-    <Compile Include="Assets\Scripts\Gameplay\Logic\PlayerChip.cs" />
-    <Compile Include="Assets\Scripts\Gameplay\Logic\ChipMover.cs" />
+    <Compile Include="Assets\Scripts\AddressablesHelpers\AddressableSpriteLoader.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

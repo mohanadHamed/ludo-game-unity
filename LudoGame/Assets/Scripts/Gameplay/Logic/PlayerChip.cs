@@ -1,7 +1,9 @@
 using System;
+using Assets.Scripts.AddressablesHelpers;
 using Assets.Scripts.DataTypes;
 using Assets.Scripts.UI.Tiles;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Assets.Scripts.Gameplay.Logic
 {
@@ -21,7 +23,15 @@ namespace Assets.Scripts.Gameplay.Logic
 
         [SerializeField] private PlayerColorOption _playerColorOption;
         [SerializeField] private int _chipNumber;
+        [SerializeField] private string _chipSpriteAddress;
 
+        private void Start()
+        {
+            AddressableSpriteLoader.LoadSprite(_chipSpriteAddress, (sprite) =>
+            {
+                GetComponent<Image>().sprite = sprite;
+            });
+        }
         public void FixSize(float cellPixelSize)
         {
             GetComponent<RectTransform>().sizeDelta = new Vector2(cellPixelSize, cellPixelSize);

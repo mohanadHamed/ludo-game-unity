@@ -597,13 +597,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f924d647863ec74192725bbc8417252, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _frames:
-  - {fileID: 21300000, guid: 195de83e76de21e4da08ec6c07a4c347, type: 3}
-  - {fileID: 21300000, guid: dd4fc485ee9fb0941a51645ce69c9bf6, type: 3}
-  - {fileID: 21300000, guid: 4bbf6b1109794504194f6961ad45d248, type: 3}
-  - {fileID: 21300000, guid: 02ce94488be09db49866013b4d496a22, type: 3}
-  - {fileID: 21300000, guid: 0a941e8ea140b6444a48ea2e9ea728cc, type: 3}
-  - {fileID: 21300000, guid: 526369644f393524e8d01f39180984cc, type: 3}
+  _frameAddresses:
+  - Dice/dice_1
+  - Dice/dice_2
+  - Dice/dice_3
+  - Dice/dice_4
+  - Dice/dice_5
+  - Dice/dice_6
 --- !u!1 &3470942031397476627
 GameObject:
   m_ObjectHideFlags: 0

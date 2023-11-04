@@ -1,8 +1,9 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
+using Assets.Scripts.AddressablesHelpers;
 using UnityEngine;
 using UnityEngine.UI;
-using Random = UnityEngine.Random;
 
 namespace Assets.Scripts.UI.Dice
 {
@@ -10,9 +11,23 @@ namespace Assets.Scripts.UI.Dice
     {
         public bool IsAnimating => _animateRoutine != null;
 
-        [SerializeField] private Sprite[] _frames;
+        [SerializeField] private string[] _frameAddresses;
 
+        private List<Sprite> _frames;
         private Coroutine _animateRoutine;
+
+        private void Start()
+        {
+            _frames = new List<Sprite>();
+
+            foreach (var spriteAddress in _frameAddresses)
+            {
+                AddressableSpriteLoader.LoadSprite(spriteAddress, (sprite) =>
+                {
+                    _frames.Add(sprite);
+                });
+            }
+        }
 
         public void Animate()
         {
@@ -39,7 +54,7 @@ namespace Assets.Scripts.UI.Dice
         {
             if (result != -1)
             {
-                GetComponent<Image>().sprite = _frames[Math.Clamp(result - 1, 0, _frames.Length)];
+                GetComponent<Image>().sprite = _frames[Math.Clamp(result - 1, 0, _frames.Count)];
             }
             else
             {
@@ -57,7 +72,7 @@ namespace Assets.Scripts.UI.Dice
             while (true)
             {
                 var rand = new System.Random((int)(Time.time * 1000));
-                var frameIndex = rand.Next(0, _frames.Length);
+                var frameIndex = rand.Next(0, _frames.Count);
                 var rotation = new Vector3(0, 0, rand.Next(-180, 180));
 
                 GetComponent<Image>().sprite = _frames[frameIndex];
