@@ -2,7 +2,7 @@
 A simple UI with a Roll button to roll a virtual die and a Reset button to
 return the chip to its initial position.
 
-![image](https://github.com/mohanadHamed/ludo-game-unity/assets/2360668/46528ffe-fe2b-4f8b-b07d-e64a6e6de0ed)
+![image](https://github.com/mohanadHamed/ludo-game-unity/assets/2360668/36e5baaf-7267-4d97-bc18-6539d5b9f708)
 
 
 # Features
