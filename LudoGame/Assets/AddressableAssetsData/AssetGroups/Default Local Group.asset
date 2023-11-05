@@ -45,6 +45,10 @@ MonoBehaviour:
     m_Address: Dice/dice_4
     m_ReadOnly: 0
     m_SerializedLabels: []
+  - m_GUID: 158763e204f870545bb7d969d1b848ef
+    m_Address: Assets/Resources_addressables
+    m_ReadOnly: 0
+    m_SerializedLabels: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: e9e95eb3db19fb74dbf2a253a4893a03, type: 2}
   m_SchemaSet:

@@ -1,6 +1,6 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
+using Assets.Scripts.DataTypes;
 using Assets.Scripts.UI.Tiles;
 using UnityEngine;
 
@@ -10,17 +10,13 @@ namespace Assets.Scripts.Gameplay.Logic
     {
         private const float MoveStepDelaySeconds = 0.3f;
 
-        public static readonly Tuple<int, int> StartTileGridPositionInTileGrid = new(1, 2);
+        public static readonly GridCoords StartTileGridPositionInTileGrid = new(1, 2);
 
-        public static readonly Tuple<int, int> TopLeftGridPositionInTileGrid = new(0, 0);
+        public static readonly GridCoords BottomRightGridPositionInTileGrid = new(5, 2);
 
-        public static readonly Tuple<int, int> BottomRightGridPositionInTileGrid = new(5, 2);
+        public static readonly GridCoords BottomLeftGridPositionInTileGrid = new(5, 0);
 
-        public static readonly Tuple<int,int> BottomLeftGridPositionInTileGrid = new(5, 0);
-
-        public static readonly Tuple<int, int> BottomMiddleGridPositionInTileGrid = new(5, 1);
-
-        public static readonly Tuple<int, int> TopMiddleGridPositionInTileGrid = new(0, 1);
+        public static readonly GridCoords BottomMiddleGridPositionInTileGrid = new(5, 1);
 
         public static IEnumerator Move(PlayerChip playerChip, LudoBoardUiComponent ludoBoardUiComponent)
         {
@@ -55,7 +51,7 @@ namespace Assets.Scripts.Gameplay.Logic
             else
             {
                 playerChip.transform.SetParent(playerChip.CurrentTilesGrid
-                    .GridTiles[playerChip.CurrentGridPosition.Item1, playerChip.CurrentGridPosition.Item2].transform);
+                    .GridTiles[playerChip.CurrentGridPosition.Row, playerChip.CurrentGridPosition.Col].transform);
             }
 
             playerChip.GetComponent<RectTransform>().anchoredPosition = Vector2.zero;
@@ -70,7 +66,9 @@ namespace Assets.Scripts.Gameplay.Logic
                 { ludoBoardUiComponent.TilesGridRed, ludoBoardUiComponent.TilesGridBlue },
                 { ludoBoardUiComponent.TilesGridBlue, ludoBoardUiComponent.TilesGridYellow }
             };
+
             var homeTileGrid = ludoBoardUiComponent.GetStartingTilesGridForColorOption(playerChip.PlayerColorOption);
+
             if (playerChip.IsPositionReset)
             {
                 playerChip.CurrentTilesGrid = homeTileGrid;
@@ -81,7 +79,7 @@ namespace Assets.Scripts.Gameplay.Logic
                 return;
             }
 
-            var newGridPosition = new Tuple<int, int>(playerChip.CurrentGridPosition.Item1, playerChip.CurrentGridPosition.Item2);
+            var newGridPosition = new GridCoords(playerChip.CurrentGridPosition.Row, playerChip.CurrentGridPosition.Col);
 
             if (playerChip.CurrentTilesGrid == homeTileGrid &&
                 playerChip.CurrentGridPosition.Equals(BottomMiddleGridPositionInTileGrid))
@@ -89,17 +87,17 @@ namespace Assets.Scripts.Gameplay.Logic
                 playerChip.IsHomeReached = true;
             }
             else if (playerChip.CurrentTilesGrid == homeTileGrid &&
-                playerChip.CurrentGridPosition.Item2 == 1)
+                playerChip.CurrentGridPosition.Col == 1)
             {
-                newGridPosition = Tuple.Create(playerChip.CurrentGridPosition.Item1 + 1, playerChip.CurrentGridPosition.Item2);
+                newGridPosition = new GridCoords(playerChip.CurrentGridPosition.Row + 1, playerChip.CurrentGridPosition.Col);
             }
-            else if (playerChip.CurrentGridPosition.Item1 > 0 && playerChip.CurrentGridPosition.Item2 == 0)
+            else if (playerChip.CurrentGridPosition.Row > 0 && playerChip.CurrentGridPosition.Col == 0)
             {
-                newGridPosition = Tuple.Create(playerChip.CurrentGridPosition.Item1 - 1, playerChip.CurrentGridPosition.Item2);
+                newGridPosition = new GridCoords(playerChip.CurrentGridPosition.Row - 1, playerChip.CurrentGridPosition.Col);
             }
-            else if (playerChip.CurrentGridPosition.Item1 == 0 && playerChip.CurrentGridPosition.Item2 < playerChip.CurrentTilesGrid.GridTiles.GetLength(1) - 1)
+            else if (playerChip.CurrentGridPosition.Row == 0 && playerChip.CurrentGridPosition.Col < playerChip.CurrentTilesGrid.GridTiles.GetLength(1) - 1)
             {
-                newGridPosition = Tuple.Create(playerChip.CurrentGridPosition.Item1, playerChip.CurrentGridPosition.Item2 + 1);
+                newGridPosition = new GridCoords(playerChip.CurrentGridPosition.Row, playerChip.CurrentGridPosition.Col + 1);
             }
             else if (playerChip.CurrentGridPosition.Equals(BottomRightGridPositionInTileGrid))
             {
@@ -108,7 +106,7 @@ namespace Assets.Scripts.Gameplay.Logic
             }
             else
             {
-                newGridPosition = Tuple.Create(playerChip.CurrentGridPosition.Item1 + 1, playerChip.CurrentGridPosition.Item2);
+                newGridPosition = new GridCoords(playerChip.CurrentGridPosition.Row + 1, playerChip.CurrentGridPosition.Col);
             }
 
             playerChip.CurrentGridPosition = newGridPosition;
@@ -119,9 +117,9 @@ namespace Assets.Scripts.Gameplay.Logic
             var homeTileGrid = ludoBoardUiComponent.GetStartingTilesGridForColorOption(playerChip.PlayerColorOption);
 
             if (playerChip.CurrentTilesGrid == homeTileGrid &&
-                playerChip.CurrentGridPosition.Item2 == 1)
+                playerChip.CurrentGridPosition.Col == 1)
             {
-                return BottomLeftGridPositionInTileGrid.Item1 - playerChip.CurrentGridPosition.Item1 + 1;
+                return BottomLeftGridPositionInTileGrid.Row - playerChip.CurrentGridPosition.Row + 1;
             }
 
             return int.MaxValue;;

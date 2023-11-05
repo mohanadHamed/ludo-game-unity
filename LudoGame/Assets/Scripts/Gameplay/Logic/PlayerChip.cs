@@ -1,4 +1,3 @@
-using System;
 using Assets.Scripts.AddressablesHelpers;
 using Assets.Scripts.DataTypes;
 using Assets.Scripts.UI.Tiles;
@@ -17,7 +16,7 @@ namespace Assets.Scripts.Gameplay.Logic
 
         public TilesGrid CurrentTilesGrid { get; set; }
 
-        public Tuple<int,int> CurrentGridPosition { get; set; }
+        public GridCoords CurrentGridPosition { get; set; }
 
         public int ChipNumber => _chipNumber;
 
@@ -32,6 +31,7 @@ namespace Assets.Scripts.Gameplay.Logic
                 GetComponent<Image>().sprite = sprite;
             });
         }
+
         public void FixSize(float cellPixelSize)
         {
             GetComponent<RectTransform>().sizeDelta = new Vector2(cellPixelSize, cellPixelSize);
@@ -55,7 +55,7 @@ namespace Assets.Scripts.Gameplay.Logic
 
             IsPositionReset = true;
             IsHomeReached = false;
-            CurrentGridPosition = new Tuple<int, int>(-1, -1);
+            CurrentGridPosition = new GridCoords(-1, -1);
             CurrentTilesGrid = ludoBoard.GetStartingTilesGridForColorOption(PlayerColorOption);
         }
 

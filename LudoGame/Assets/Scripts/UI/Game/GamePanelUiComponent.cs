@@ -32,7 +32,6 @@ namespace Assets.Scripts.UI.Game
             
         }
 
-
         public void RollButtonClick(DiceAnimate diceAnimate)
         {
             GameplayManager.Instance.RollDice(diceAnimate);
